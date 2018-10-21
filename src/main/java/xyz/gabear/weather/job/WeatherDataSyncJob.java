@@ -27,22 +27,17 @@ public class WeatherDataSyncJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         log.info("Weather Data Sync Job. Start！");
         // 获取城市ID列表
-        List<City> cityList = null;
-
         try {
-            cityList = cityDataService.listCity();
+            List<City> cityList = cityDataService.listCity();
+            // 遍历城市ID获取天气
+            for (City city : cityList) {
+                String cityId = city.getCityId();
+                log.info("Weather Data Sync Job, cityId:" + cityId);
+                weatherDataService.syncDateByCityId(cityId);
+            }
         } catch (Exception e) {
-            log.error("Exception!", e);
+            log.error("获取城市列表异常!", e);
         }
-
-        // 遍历城市ID获取天气
-        for (City city : cityList) {
-            String cityId = city.getCityId();
-            log.info("Weather Data Sync Job, cityId:" + cityId);
-
-            weatherDataService.syncDateByCityId(cityId);
-        }
-
         log.info("Weather Data Sync Job. End！");
     }
 

@@ -15,6 +15,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class CityList {
-    @XmlElement(name = "d")
+    @XmlElement(name = "d") // 根据节点元素映射
     private List<City> cityList;
 }

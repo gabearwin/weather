@@ -10,11 +10,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * City.
  */
-@XmlRootElement(name = "d")
+@XmlRootElement(name = "d") // xml根元素
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class City {
-    @XmlAttribute(name = "d1")
+    @XmlAttribute(name = "d1") // 根据属性映射
     private String cityId;
 
     @XmlAttribute(name = "d2")
